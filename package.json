@@ -1,0 +1,39 @@
+{
+  "name": "@juro/shared",
+  "version": "0.3.3",
+  "description": "Shared components, utilities, and hooks for the projects",
+  "main": "index.cjs",
+  "module": "index.mjs",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.cjs"
+    }
+  },
+  "keywords": [
+    "react",
+    "components",
+    "shared"
+  ],
+  "author": "Juro",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "@nextui-org/react": "^2.6.10",
+    "zustand": "^5.0.3",
+    "axios": "^1.8.4",
+    "react-hot-toast": "^2.5.2",
+    "sweetalert2": "^11.17.2",
+    "lucide-react": "^0.263.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YOUR_USERNAME/juro-shared-dist.git"
+  },
+  "homepage": "https://github.com/YOUR_USERNAME/juro-shared-dist#readme",
+  "bugs": {
+    "url": "https://github.com/YOUR_USERNAME/juro-shared-dist/issues"
+  }
+}
