@@ -30,10 +30,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YOUR_USERNAME/juro-shared-dist.git"
+    "url": "git+https://github.com/nyeinkyawwin02/react-shared-components.git"
   },
-  "homepage": "https://github.com/YOUR_USERNAME/juro-shared-dist#readme",
+  "homepage": "https://github.com/nyeinkyawwin02/react-shared-components#readme",
   "bugs": {
-    "url": "https://github.com/YOUR_USERNAME/juro-shared-dist/issues"
+    "url": "https://github.com/nyeinkyawwin02/react-shared-components/issues"
   }
 }
