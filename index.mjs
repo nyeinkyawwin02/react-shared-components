@@ -1,7 +1,7 @@
 import ie from "axios";
 import { useState as T, useEffect as J, Component as Be, useMemo as O, useRef as Ce, useCallback as D } from "react";
 import { jsxs as c, Fragment as X, jsx as t } from "react/jsx-runtime";
-import a from "prop-types";
+import o from "prop-types";
 import { Table as Te, TableHeader as Pe, TableColumn as ke, TableBody as ye, Spinner as Y, TableRow as Ie, TableCell as $e, Pagination as Ue, Button as H, Modal as ce, ModalContent as de, ModalHeader as ue, ModalBody as me, ModalFooter as pe, Select as Ne, SelectItem as ne, Input as Ae, Autocomplete as je, AutocompleteItem as Oe } from "@nextui-org/react";
 import { useLocation as Ve, Link as qe } from "react-router-dom";
 import { Toaster as ze } from "react-hot-toast";
@@ -61,31 +61,31 @@ const $r = (r) => new Intl.NumberFormat("en-US", {
 }, re = {}, rr = (r) => (e) => {
   var l;
   const n = localStorage.getItem(r.tokenKey), s = localStorage.getItem(r.userKey);
-  let o = {};
+  let a = {};
   try {
-    o = s ? JSON.parse(s) : {};
+    a = s ? JSON.parse(s) : {};
   } catch (i) {
     console.error("Error parsing user data:", i);
   }
   if (n && (e.headers.Authorization = `Bearer ${n}`, r.includeBranchLogic)) {
-    const i = ((l = o.relatedBranch) == null ? void 0 : l._id) || o.relatedBranch;
+    const i = ((l = a.relatedBranch) == null ? void 0 : l._id) || a.relatedBranch;
     if (i && (e.params = {
       ...e.params,
       relatedBranch: i
     }, ["post", "put", "patch"].includes(e.method)))
       if (e.data instanceof FormData)
-        e.data.has("relatedBranch") ? e.data.get("relatedBranch") || e.data.set("relatedBranch", i) : e.data.append("relatedBranch", i), r.includeCreatedBy && (!e.data.has("createdBy") || !e.data.get("createdBy") ? e.data.append("createdBy", o._id || o.id) : e.data.get("createdBy") || e.data.set("createdBy", o._id || o.id));
+        e.data.has("relatedBranch") ? e.data.get("relatedBranch") || e.data.set("relatedBranch", i) : e.data.append("relatedBranch", i), r.includeCreatedBy && (!e.data.has("createdBy") || !e.data.get("createdBy") ? e.data.append("createdBy", a._id || a.id) : e.data.get("createdBy") || e.data.set("createdBy", a._id || a.id));
       else {
         const m = {
           relatedBranch: i
         };
-        r.includeCreatedBy && (m.createdBy = o._id || o.id), e.data = {
+        r.includeCreatedBy && (m.createdBy = a._id || a.id), e.data = {
           ...e.data,
           ...m
         };
       }
   }
-  return r.transformRequest ? r.transformRequest(e, o, n) : e;
+  return r.transformRequest ? r.transformRequest(e, a, n) : e;
 }, Ar = (r) => (e) => {
   const n = localStorage.getItem(r.tokenKey);
   return n && (e.headers.Authorization = `Bearer ${n}`), e;
@@ -112,14 +112,14 @@ const $r = (r) => new Intl.NumberFormat("en-US", {
   }
 }), Or = se(), W = (r, e = {}) => {
   if (e.showNotification === !1) return;
-  const n = he(e.apiConfig), s = e.onSuccess || Xe(n), o = e.customSuccessMessage || r;
-  s(o);
+  const n = he(e.apiConfig), s = e.onSuccess || Xe(n), a = e.customSuccessMessage || r;
+  s(a);
 }, q = (r, e = {}) => {
   if (e.showNotification === !1) return;
-  const n = he(e.apiConfig), s = e.onError || Ye(n), o = e.customErrorMessage || r;
-  s(o);
+  const n = he(e.apiConfig), s = e.onError || Ye(n), a = e.customErrorMessage || r;
+  s(a);
 }, Le = async (r, e = {}, n = z(), s = {}) => {
-  var o, l;
+  var a, l;
   try {
     return (await n.get(r, { params: e })).data;
   } catch (i) {
@@ -128,24 +128,24 @@ const $r = (r) => new Intl.NumberFormat("en-US", {
         isSuccess: !0,
         data: []
       };
-    const m = ((l = (o = i == null ? void 0 : i.response) == null ? void 0 : o.data) == null ? void 0 : l.message) || "Request failed";
+    const m = ((l = (a = i == null ? void 0 : i.response) == null ? void 0 : a.data) == null ? void 0 : l.message) || "Request failed";
     return q(m, s), {
       success: !1,
       data: [],
       message: m
     };
   }
-}, Vr = async (r, e, n, s, o = z(), l = {}) => {
+}, Vr = async (r, e, n, s, a = z(), l = {}) => {
   var i, m;
   try {
-    const g = await import("sweetalert2").catch(() => null), f = await o.post(r, e, n);
+    const g = await import("sweetalert2").catch(() => null), f = await a.post(r, e, n);
     return g != null && g.default ? g.default.fire({
       title: "Successful!",
       text: `Check your ${s} for password!`,
       icon: "success",
       showConfirmButton: !1,
       timer: 4e3
-    }) : W(`Check your ${s} for password!`, l), f.data.data;
+    }) : s && W(`Check your ${s} for password!`, l), f.data.data;
   } catch (g) {
     const f = await import("sweetalert2").catch(() => null), b = ((m = (i = g.response) == null ? void 0 : i.data) == null ? void 0 : m.message) || "Request failed";
     f != null && f.default ? f.default.fire({
@@ -156,16 +156,16 @@ const $r = (r) => new Intl.NumberFormat("en-US", {
       timer: 2e3
     }) : q(b, l);
   }
-}, fe = async (r, e, n = {}, s, o = z(), l = {}) => {
+}, fe = async (r, e, n = {}, s, a = z(), l = {}) => {
   var i, m;
   try {
-    const g = await o.post(r, e, n);
-    return g.data.isSuccess && (r.split("?")[0] === "auth/login" ? W("Login successfully!", l) : W(`The ${s} had been created successfully!`, l)), g.data;
+    const g = await a.post(r, e, n);
+    return g.data.isSuccess && (r.split("?")[0] === "auth/login" ? W("Login successfully!", l) : s && W(`The ${s} had been created successfully!`, l)), g.data;
   } catch (g) {
     const f = ((m = (i = g.response) == null ? void 0 : i.data) == null ? void 0 : m.message) || "Request failed";
     return q(f, l), _(f, []);
   }
-}, qr = async (r, e, n = {}, s, o = z(), l = {}) => await fe(
+}, qr = async (r, e, n = {}, s, a = z(), l = {}) => await fe(
   r,
   e,
   {
@@ -175,18 +175,18 @@ const $r = (r) => new Intl.NumberFormat("en-US", {
     ...n
   },
   s,
-  o,
+  a,
   l
-), Ee = async (r, e, n, s, o, l = z(), i = {}) => {
+), Ee = async (r, e, n, s, a, l = z(), i = {}) => {
   var m, g;
   try {
     const f = await l.put(r + e, n, s);
-    return f.data.isSuccess ? W("Saved Your Changes!", i) : q("Something Wrong!", i), f.data;
+    return f.data.isSuccess ? a === null || W(a ? `The ${a} had been updated successfully!` : "Saved Your Changes!", i) : q("Something Wrong!", i), f.data;
   } catch (f) {
     const b = ((g = (m = f.response) == null ? void 0 : m.data) == null ? void 0 : g.message) || "Update failed";
     return q(b, i), _(b, []);
   }
-}, zr = async (r, e, n, s = {}, o, l = z(), i = {}) => await Ee(
+}, zr = async (r, e, n, s = {}, a, l = z(), i = {}) => await Ee(
   r,
   e,
   n,
@@ -196,37 +196,37 @@ const $r = (r) => new Intl.NumberFormat("en-US", {
     },
     ...s
   },
-  o,
+  a,
   l,
   i
-), ar = async (r, e, n = {}, s = z(), o = {}) => await Le(r + e, n, s, o), sr = async (r, e, n, s = z(), o = {}) => {
+), ar = async (r, e, n = {}, s = z(), a = {}) => await Le(r + e, n, s, a), sr = async (r, e, n, s = z(), a = {}) => {
   var l, i;
   try {
-    return (await s.delete(r + e)).data.isSuccess && W(`The ${n} had been deleted successfully!`, o), !0;
+    return (await s.delete(r + e)).data.isSuccess && n && W(`The ${n} had been deleted successfully!`, a), !0;
   } catch (m) {
     const g = ((i = (l = m.response) == null ? void 0 : l.data) == null ? void 0 : i.message) || "Delete failed";
-    return q(g, o), !1;
+    return q(g, a), !1;
   }
 }, Kr = (r, e = {}) => {
   const n = [], s = [];
   if (r.forEach(
     ({
-      condition: o,
+      condition: a,
       label: l,
       customMsg: i = "",
       isRequired: m = !1,
       isCustom: g = !1
     }) => {
-      o && (m && n.push(l), g && s.push(i));
+      a && (m && n.push(l), g && s.push(i));
     }
   ), n.length > 0) {
-    const o = `These field(s) are required to fill: ${n.join(", ")}`;
-    return q(o, e), _(o);
+    const a = `These field(s) are required to fill: ${n.join(", ")}`;
+    return q(a, e), _(a);
   }
   if (s.length > 0) {
-    const o = `Validation Error: ${s.join(`,
+    const a = `Validation Error: ${s.join(`,
 `)}`;
-    return q(o, e), _(o);
+    return q(a, e), _(a);
   }
   return _e();
 };
@@ -254,11 +254,11 @@ const Hr = (r = {}) => {
 function Wr(r, e = 500) {
   const [n, s] = T(r);
   return J(() => {
-    const o = setTimeout(() => {
+    const a = setTimeout(() => {
       s(r);
     }, e);
     return () => {
-      clearTimeout(o);
+      clearTimeout(a);
     };
   }, [r, e]), n;
 }
@@ -267,7 +267,7 @@ function lr({
   data: e = [],
   pagination: n = { total: 0, totalPages: 1 },
   filter: s = { page: 1, limit: 10 },
-  isLoading: o = !1,
+  isLoading: a = !1,
   isError: l = !1,
   errorMsg: i = "",
   onFilterChange: m,
@@ -333,63 +333,63 @@ function lr({
         ) }),
         children: [
           /* @__PURE__ */ t(Pe, { children: r.map((p) => /* @__PURE__ */ t(ke, { children: p.label }, p.key)) }),
-          o ? /* @__PURE__ */ t(ye, { emptyContent: /* @__PURE__ */ t(Y, {}) }) : /* @__PURE__ */ t(ye, { emptyContent: l ? i : g, children: e == null ? void 0 : e.map((p, y) => /* @__PURE__ */ t(Ie, { children: r.map((E) => /* @__PURE__ */ t($e, { children: E.render ? E.render(p, y) : p[E.key] }, E.key)) }, p._id || y)) })
+          a ? /* @__PURE__ */ t(ye, { emptyContent: /* @__PURE__ */ t(Y, {}) }) : /* @__PURE__ */ t(ye, { emptyContent: l ? i : g, children: e == null ? void 0 : e.map((p, y) => /* @__PURE__ */ t(Ie, { children: r.map((E) => /* @__PURE__ */ t($e, { children: E.render ? E.render(p, y) : p[E.key] }, E.key)) }, p._id || y)) })
         ]
       }
     )
   ] });
 }
 lr.propTypes = {
-  columns: a.arrayOf(
-    a.shape({
-      key: a.string.isRequired,
-      label: a.string.isRequired,
-      render: a.func
+  columns: o.arrayOf(
+    o.shape({
+      key: o.string.isRequired,
+      label: o.string.isRequired,
+      render: o.func
     })
   ).isRequired,
-  data: a.array,
-  pagination: a.shape({
-    total: a.number,
-    totalPages: a.number
+  data: o.array,
+  pagination: o.shape({
+    total: o.number,
+    totalPages: o.number
   }),
-  filter: a.shape({
-    page: a.number,
-    limit: a.number
+  filter: o.shape({
+    page: o.number,
+    limit: o.number
   }),
-  isLoading: a.bool,
-  isError: a.bool,
-  errorMsg: a.string,
-  onFilterChange: a.func.isRequired,
-  emptyMessage: a.string,
-  ariaLabel: a.string
+  isLoading: o.bool,
+  isError: o.bool,
+  errorMsg: o.string,
+  onFilterChange: o.func.isRequired,
+  emptyMessage: o.string,
+  ariaLabel: o.string
 };
 const oe = (r) => {
   const {
     isLoading: e = !1,
     isDisabled: n = !1,
     className: s = "",
-    label: o = "",
+    label: a = "",
     children: l,
     ...i
   } = r;
   return /* @__PURE__ */ c(H, { className: `w-full ${s}`, disabled: n, ...i, children: [
-    e ? /* @__PURE__ */ t(Y, { color: "white" }) : o,
+    e ? /* @__PURE__ */ t(Y, { color: "white" }) : a,
     l
   ] });
 };
 oe.propTypes = {
-  isLoading: a.bool,
-  isDisabled: a.bool,
-  className: a.string,
-  label: a.string,
-  children: a.any
+  isLoading: o.bool,
+  isDisabled: o.bool,
+  className: o.string,
+  label: o.string,
+  children: o.any
 };
 const ir = ({
   header: r = "Header",
   title: e = "Title",
   cancelText: n = "No",
   confirmText: s = "Yes",
-  size: o = "lg",
+  size: a = "lg",
   isOpen: l = !1,
   isBtnDisabled: i = !1,
   classNames: m = {},
@@ -400,7 +400,7 @@ const ir = ({
   ce,
   {
     backdrop: "blur",
-    size: o,
+    size: a,
     isOpen: l,
     onClose: f,
     closeButton: !0,
@@ -437,21 +437,21 @@ const ir = ({
   }
 );
 ir.propTypes = {
-  header: a.string,
-  title: a.string,
-  cancelText: a.string,
-  confirmText: a.string,
-  size: a.string,
-  isOpen: a.bool,
-  isBtnDisabled: a.bool,
-  classNames: a.any,
-  children: a.any,
-  onClose: a.func,
-  onKeyDown: a.func
+  header: o.string,
+  title: o.string,
+  cancelText: o.string,
+  confirmText: o.string,
+  size: o.string,
+  isOpen: o.bool,
+  isBtnDisabled: o.bool,
+  classNames: o.any,
+  children: o.any,
+  onClose: o.func,
+  onKeyDown: o.func
 };
 const cr = ({ className: r = "" }) => /* @__PURE__ */ t("div", { className: `flex justify-center items-center ${r}`, children: /* @__PURE__ */ t(Y, {}) });
 cr.propTypes = {
-  className: a.string
+  className: o.string
 };
 class dr extends Be {
   constructor(e) {
@@ -481,22 +481,22 @@ class dr extends Be {
   }
 }
 dr.propTypes = {
-  children: a.node.isRequired
+  children: o.node.isRequired
 };
 const ur = "my-1 w-full p-3 flex items-center gap-2 border border-gray-200 text-base rounded-lg transition-all duration-300", mr = ({ path: r, title: e, icon: n }) => {
-  const s = Ve(), o = O(() => {
+  const s = Ve(), a = O(() => {
     const l = s.pathname.split("?")[0].replace(/\/$/, ""), i = r.replace(/\/$/, "");
     return l === i || l.startsWith(i + "/") ? "bg-red-50 text-red-900 font-semibold border-red-900" : "bg-white text-gray-700 hover:bg-red-50 hover:text-red-800 hover:border-red-200";
   }, [s.pathname, r]);
-  return /* @__PURE__ */ c(qe, { to: r, className: `${ur} ${o}`, children: [
+  return /* @__PURE__ */ c(qe, { to: r, className: `${ur} ${a}`, children: [
     n && /* @__PURE__ */ t("span", { className: "flex-shrink-0", children: n }),
     e && /* @__PURE__ */ t("span", { className: "truncate", children: e })
   ] });
 };
 mr.propTypes = {
-  path: a.string.isRequired,
-  title: a.string.isRequired,
-  icon: a.node
+  path: o.string.isRequired,
+  title: o.string.isRequired,
+  icon: o.node
 };
 function Gr() {
   return /* @__PURE__ */ t("div", { className: "flex items-center justify-center min-h-screen", children: /* @__PURE__ */ c("div", { className: "text-center space-y-4", children: [
@@ -649,8 +649,8 @@ const le = ({
   }
 );
 le.propTypes = Fe.propTypes = Re.propTypes = {
-  className: a.string,
-  filled: a.bool
+  className: o.string,
+  filled: o.bool
 };
 function pr(r, e) {
   const n = URL.createObjectURL(r), s = document.createElement("a");
@@ -662,22 +662,22 @@ function hr(r) {
   return e && e[1] ? e[1].replace(/['"]/g, "") : null;
 }
 function _r({ url: r, className: e = "", file: n }) {
-  const [s, o] = T(0), [l, i] = T(!1);
+  const [s, a] = T(0), [l, i] = T(!1);
   async function m() {
     var f;
-    i(!0), o(0);
+    i(!0), a(0);
     try {
       const b = await ie.get(r, {
         responseType: "blob",
         onDownloadProgress: (y) => {
           if (y.lengthComputable || y.total) {
             const E = y.total || 0, k = E ? Math.round(y.loaded * 100 / E) : 0;
-            o(k);
+            a(k);
           } else
-            o((E) => Math.min(E + 5, 99));
+            a((E) => Math.min(E + 5, 99));
         }
       }), v = b.headers["content-disposition"] || b.headers["Content-Disposition"], p = hr(v) || new URL(r).pathname.split("/").pop() || "download";
-      pr(b.data, p), o(100);
+      pr(b.data, p), a(100);
     } catch (b) {
       console.error("Download error", b);
       const v = (f = b == null ? void 0 : b.response) != null && f.data ? "Server responded with an error" : b.message || "Unknown error";
@@ -685,7 +685,7 @@ function _r({ url: r, className: e = "", file: n }) {
     } finally {
       setTimeout(
         () => {
-          i(!1), setTimeout(() => o(0), 300);
+          i(!1), setTimeout(() => a(0), 300);
         },
         s >= 100 ? 600 : 200
       );
@@ -734,7 +734,7 @@ function _r({ url: r, className: e = "", file: n }) {
 }
 const fr = ({ text: r = "" }) => /* @__PURE__ */ t("p", { className: "cursor-help", title: r, children: Ze({ text: r }) });
 fr.propTypes = {
-  text: a.string
+  text: o.string
 };
 const gr = ({
   condition: r = !0,
@@ -748,24 +748,24 @@ const gr = ({
   }
 );
 gr.propTypes = {
-  condition: a.bool,
-  text: a.string,
-  className: a.string
+  condition: o.bool,
+  text: o.string,
+  className: o.string
 };
 const br = ({ children: r }) => /* @__PURE__ */ c("div", { className: "w-[96%] mx-auto  p-4  rounded-lg", children: [
   /* @__PURE__ */ t(ze, {}),
   r
 ] });
 br.propTypes = {
-  children: a.node.isRequired
+  children: o.node.isRequired
 };
 const Qr = ({
   itemsToExport: r,
   onClose: e,
   onExportSuccess: n
 }) => {
-  const [s, o] = T(!1), l = () => {
-    o(!0);
+  const [s, a] = T(!1), l = () => {
+    a(!0);
     try {
       const i = [
         "Code",
@@ -808,7 +808,7 @@ const Qr = ({
     } catch (i) {
       console.error("Error exporting Excel file:", i), alert("Failed to export Excel file. Please try again.");
     } finally {
-      o(!1), e();
+      a(!1), e();
     }
   };
   return /* @__PURE__ */ t(ce, { isOpen: !0, onClose: e, children: /* @__PURE__ */ t(de, { children: (i) => /* @__PURE__ */ c(X, { children: [
@@ -846,7 +846,7 @@ const Qr = ({
     ] })
   ] }) }) });
 }, Jr = ({ onClose: r, onImportSuccess: e }) => {
-  const [n, s] = T(null), [o, l] = T(""), [i, m] = T(""), [g, f] = T(!1), b = (p) => {
+  const [n, s] = T(null), [a, l] = T(""), [i, m] = T(""), [g, f] = T(!1), b = (p) => {
     const y = p.target.files[0];
     s(y);
   }, v = () => {
@@ -877,9 +877,9 @@ const Qr = ({
           accept: ".xlsx, .xls"
         }
       ),
-      o && /* @__PURE__ */ c("p", { className: "text-gray-600 text-sm mt-2", children: [
+      a && /* @__PURE__ */ c("p", { className: "text-gray-600 text-sm mt-2", children: [
         "Selected: ",
-        o
+        a
       ] })
     ] }),
     /* @__PURE__ */ c(pe, { children: [
@@ -907,20 +907,20 @@ const Qr = ({
   ] }) }) });
 }, yr = ({ children: r, className: e = "" }) => /* @__PURE__ */ t("div", { className: `w-full ${e}`, children: r });
 yr.propTypes = {
-  children: a.any,
-  className: a.string
+  children: o.any,
+  className: o.string
 };
 const wr = ({ children: r, className: e = "" }) => /* @__PURE__ */ t("div", { className: `grid grid-cols-1 md:grid-cols-2 gap-4 ${e}`, children: r });
 wr.propTypes = {
-  children: a.any,
-  className: a.string
+  children: o.any,
+  className: o.string
 };
 const xr = ({
   label: r = "File Upload",
   value: e,
   id: n,
   onChange: s,
-  accept: o = "image/*",
+  accept: a = "image/*",
   isDisabled: l = !1,
   showPreview: i = !0,
   maxSizeMB: m = 5,
@@ -942,14 +942,14 @@ const xr = ({
     (C) => {
       if (C.size / 1048576 > m)
         return p(`File size must be less than ${m}MB`), !1;
-      if (o && o !== "*") {
-        const P = o.split(",").map((R) => R.trim()), u = C.type, B = "." + C.name.split(".").pop();
+      if (a && a !== "*") {
+        const P = a.split(",").map((R) => R.trim()), u = C.type, B = "." + C.name.split(".").pop();
         if (!P.some((R) => R.endsWith("/*") ? u.startsWith(R.replace("/*", "")) : R === u || R === B))
-          return p(`File type not accepted. Accepted: ${o}`), !1;
+          return p(`File type not accepted. Accepted: ${a}`), !1;
       }
       return p(""), !0;
     },
-    [o, m]
+    [a, m]
   ), A = D(
     (C) => {
       var P;
@@ -1042,7 +1042,7 @@ const xr = ({
                     " ",
                     /* @__PURE__ */ t("span", { className: "text-primary-500 font-medium", children: "browse" })
                   ] }),
-                  /* @__PURE__ */ t("p", { className: "text-xs text-default-400", children: o === "image/*" ? `PNG, JPG, GIF, WEBP up to ${m}MB` : `Max file size: ${m}MB` })
+                  /* @__PURE__ */ t("p", { className: "text-xs text-default-400", children: a === "image/*" ? `PNG, JPG, GIF, WEBP up to ${m}MB` : `Max file size: ${m}MB` })
                 ] })
               ] }),
               /* @__PURE__ */ t(
@@ -1053,7 +1053,7 @@ const xr = ({
                   type: "file",
                   onChange: A,
                   className: "hidden",
-                  accept: o,
+                  accept: a,
                   disabled: l,
                   "aria-describedby": v ? `${n}-error` : void 0,
                   ...g
@@ -1117,21 +1117,21 @@ const xr = ({
   ] });
 };
 xr.propTypes = {
-  label: a.string,
-  value: a.oneOfType([a.instanceOf(File), a.object]),
-  id: a.string.isRequired,
-  onChange: a.func.isRequired,
-  accept: a.string,
-  isDisabled: a.bool,
-  showPreview: a.bool,
-  maxSizeMB: a.number
+  label: o.string,
+  value: o.oneOfType([o.instanceOf(File), o.object]),
+  id: o.string.isRequired,
+  onChange: o.func.isRequired,
+  accept: o.string,
+  isDisabled: o.bool,
+  showPreview: o.bool,
+  maxSizeMB: o.number
 };
 const vr = ({
   label: r = "Upload Images",
   value: e = [],
   id: n,
   onChange: s,
-  accept: o = "image/*",
+  accept: a = "image/*",
   isDisabled: l = !1,
   maxFiles: i = 10,
   maxSizeMB: m = 5,
@@ -1169,14 +1169,14 @@ const vr = ({
     (u) => {
       if (u.size / 1048576 > m)
         return p(`File "${u.name}" is too large. Max size: ${m}MB`), !1;
-      if (o && o !== "*") {
-        const N = o.split(",").map((V) => V.trim()), R = u.type, $ = "." + u.name.split(".").pop();
+      if (a && a !== "*") {
+        const N = a.split(",").map((V) => V.trim()), R = u.type, $ = "." + u.name.split(".").pop();
         if (!N.some((V) => V.endsWith("/*") ? R.startsWith(V.replace("/*", "")) : V === R || V === $))
           return p(`File "${u.name}" type not accepted`), !1;
       }
       return !0;
     },
-    [o, m]
+    [a, m]
   ), F = D(
     (u) => {
       const B = Array.isArray(e) ? e : [], N = Array.from(u);
@@ -1268,7 +1268,7 @@ const vr = ({
                     " ",
                     /* @__PURE__ */ t("span", { className: "text-primary-500 font-medium", children: "browse" })
                   ] }),
-                  /* @__PURE__ */ t("p", { className: "text-xs text-default-400", children: o === "image/*" ? `PNG, JPG, GIF, WEBP up to ${m}MB each` : `Max ${m}MB per file` }),
+                  /* @__PURE__ */ t("p", { className: "text-xs text-default-400", children: a === "image/*" ? `PNG, JPG, GIF, WEBP up to ${m}MB each` : `Max ${m}MB per file` }),
                   /* @__PURE__ */ c("p", { className: "text-xs font-medium text-default-600 mt-2", children: [
                     S,
                     " / ",
@@ -1285,7 +1285,7 @@ const vr = ({
                   type: "file",
                   onChange: U,
                   className: "hidden",
-                  accept: o,
+                  accept: a,
                   disabled: l || P === 0,
                   multiple: !0,
                   "aria-describedby": v ? `${n}-error` : void 0,
@@ -1379,23 +1379,23 @@ const vr = ({
   ] });
 };
 vr.propTypes = {
-  label: a.string,
-  value: a.array,
-  id: a.string.isRequired,
-  onChange: a.func.isRequired,
-  accept: a.string,
-  isDisabled: a.bool,
-  maxFiles: a.number,
-  maxSizeMB: a.number
+  label: o.string,
+  value: o.array,
+  id: o.string.isRequired,
+  onChange: o.func.isRequired,
+  accept: o.string,
+  isDisabled: o.bool,
+  maxFiles: o.number,
+  maxSizeMB: o.number
 };
 const Cr = (r, e) => {
   const [n, s] = T(r);
   return J(() => {
-    const o = setTimeout(() => {
+    const a = setTimeout(() => {
       s(r);
     }, e);
     return () => {
-      clearTimeout(o);
+      clearTimeout(a);
     };
   }, [r, e]), [n];
 }, Nr = (r) => {
@@ -1403,7 +1403,7 @@ const Cr = (r, e) => {
     className: e = {},
     value: n = "",
     options: s = [],
-    optionValue: o = "value",
+    optionValue: a = "value",
     optionLabel: l = "label",
     onChange: i,
     isCustomOptionLabel: m = !1,
@@ -1422,8 +1422,8 @@ const Cr = (r, e) => {
     (d) => typeof d == "string" ? d : m ? g(d) : d[l] || "",
     [l, m, g]
   ), I = D(
-    (d) => typeof d == "string" ? d : d[o] || d._id || d.id || d.value,
-    [o]
+    (d) => typeof d == "string" ? d : d[a] || d._id || d.id || d.value,
+    [a]
   ), j = O(() => !s || s.length === 0 ? [] : y ? [...s].sort((d, M) => {
     const K = L(d), Se = L(M);
     return K.localeCompare(Se, void 0, { sensitivity: "base" });
@@ -1624,28 +1624,28 @@ const Cr = (r, e) => {
   );
 };
 Nr.propTypes = {
-  className: a.oneOfType([a.string, a.object]),
-  value: a.any,
-  options: a.array,
-  optionValue: a.string,
-  optionLabel: a.string,
-  onChange: a.func.isRequired,
-  isCustomOptionLabel: a.bool,
-  customLabelFunc: a.func,
-  type: a.oneOf(["select", "autocomplete"]),
-  isSearchable: a.bool,
-  isAddable: a.bool,
-  addURL: a.string,
-  needSort: a.bool,
-  selectionMode: a.oneOf(["single", "multiple"]),
-  onRemove: a.func
+  className: o.oneOfType([o.string, o.object]),
+  value: o.any,
+  options: o.array,
+  optionValue: o.string,
+  optionLabel: o.string,
+  onChange: o.func.isRequired,
+  isCustomOptionLabel: o.bool,
+  customLabelFunc: o.func,
+  type: o.oneOf(["select", "autocomplete"]),
+  isSearchable: o.bool,
+  isAddable: o.bool,
+  addURL: o.string,
+  needSort: o.bool,
+  selectionMode: o.oneOf(["single", "multiple"]),
+  onRemove: o.func
 };
 function Xr({
   entityName: r,
   baseUrl: e,
   listUrl: n,
   defaultForm: s = {},
-  defaultFilter: o = { keyword: "", limit: 10, page: 1 },
+  defaultFilter: a = { keyword: "", limit: 10, page: 1 },
   validateForm: l,
   preparePayload: i = (v) => v,
   transformFetchedData: m = (v) => v,
@@ -1670,7 +1670,7 @@ function Xr({
         }
       })),
       clearFilter: () => h(() => ({
-        filter: { ...o }
+        filter: { ...a }
       })),
       // Form management
       setForm: ({ name: w, value: x }) => h(() => ({
@@ -1803,7 +1803,7 @@ function Xr({
       data: [],
       dataFilters: [],
       pagination: { ...te },
-      filter: { ...o },
+      filter: { ...a },
       form: { ...s },
       editData: {},
       formErrors: {},
